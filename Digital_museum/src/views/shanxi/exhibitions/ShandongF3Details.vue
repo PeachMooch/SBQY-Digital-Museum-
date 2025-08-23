@@ -1,21 +1,27 @@
 <template>
-  <MainLayout>
+  <RomeLayout>
+    <template #navigation>
+      <div class="detail-nav-tabs">
+        <router-link to="/shandong/f3/detail" class="nav-tab" :class="{ active: $route.path === '/shandong/f3/detail' }">非遗名片：山东技艺</router-link>
+        <router-link to="/shandong/f3/interview" class="nav-tab">访谈纪要</router-link>
+      </div>
+    </template>
+
     <div class="detail-page">
-      <header class="header">了解详情</header>
-      <div class="card scrollable">
+      <div class="card card-fill">
         <img :src="require('@/assets/images/shandong/1.png')" class="v-img" alt="1" />
         <img :src="require('@/assets/images/shandong/2.png')" class="v-img" alt="2" />
         <img :src="require('@/assets/images/shandong/5.png')" class="v-img" alt="5" />
       </div>
     </div>
-  </MainLayout>
+  </RomeLayout>
 </template>
 
 <script>
-import MainLayout from '@/layouts/MainLayout.vue'
+import RomeLayout from '@/layouts/RomeLayout.vue'
 export default { 
   name: 'ShandongF3Details', 
-  components: { MainLayout },
+  components: { RomeLayout },
   mounted() {
     document.body.style.backgroundImage = `url(${require('@/assets/images/shandong/微信图片_2025-08-23_141907_562.png')})`
     document.body.style.backgroundRepeat = 'no-repeat'
@@ -26,14 +32,17 @@ export default {
 </script>
 
 <style scoped>
-.header { font-size: 28px; font-weight: 700; margin: 10px 0 16px; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.45) }
-.card { background: rgba(255,255,255,.92); border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2); max-width: 980px; margin: 0 auto }
-.v-img { width: 100%; display: block; margin-bottom: 16px; border-radius: 8px }
+.detail-nav-tabs { display: flex; gap: 2rem; align-items: center; }
+.nav-tab { display: block; padding: 8px 16px; color: #333; text-decoration: none; background: rgba(255,255,255,.8); border: 1px solid rgba(0,0,0,.1); border-radius: 8px; transition: all .3s ease; font-weight: 600; font-size: 14px; backdrop-filter: blur(10px); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.nav-tab:hover { color: #2563eb; background: rgba(37,99,235,.1); border-color: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,.2); text-decoration: none; }
+.nav-tab.active { color: #fff; background: linear-gradient(135deg,#2563eb,#1d4ed8); border-color: #2563eb; font-weight: 700; box-shadow: 0 4px 12px rgba(37,99,235,.3); }
 
-.scrollable { max-height: 72vh; overflow: auto; }
-.scrollable::-webkit-scrollbar { width: 10px; }
-.scrollable::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 8px; }
-.scrollable::-webkit-scrollbar-track { background: transparent; }
+.card { background: rgba(255,255,255,.96); border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2); max-width: 1100px; margin: 0 auto }
+.card-fill { min-height: calc(100vh - 110px); overflow: auto; }
+.v-img { width: 100%; display: block; margin-bottom: 16px; border-radius: 8px }
+.card-fill::-webkit-scrollbar { width: 10px; }
+.card-fill::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 8px; }
+.card-fill::-webkit-scrollbar-track { background: transparent; }
 </style>
 
 
