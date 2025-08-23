@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="shanxi-home-page">
       <div class="page-title">
-        <h1>映像山西</h1>
+        <h1>映像晋鲁</h1>
       </div>
       
       <!-- 主要导航区域 -->

@@ -4,7 +4,7 @@
       <!-- 简化的标题 -->
       <div class="simple-title">
         <h1>F4 · 三晋揽胜</h1>
-        <p>领略山西大地的壮美风光</p>
+        <p>山东展馆入口</p>
       </div>
       
       <!-- 主要展示区域 -->
@@ -12,28 +12,20 @@
         <div class="featured-item">
           <div class="item-image">
             <img 
-              :src="require('@/assets/images/展厅4.jpg')" 
-              alt="三晋风光" 
+              :src="require('@/assets/images/shandong/00.png')" 
+              alt="山东展板" 
               ref="mainImage"
             />
           </div>
           <div class="item-content">
-            <h2>🏔️ 展厅亮点：三晋风光</h2>
+            <h2>🏛️ 展厅亮点：山东 · 非遗主题</h2>
             <p>
-              山西，古称"三晋"，地处华北地区，拥有丰富的自然景观和人文景观。
-              从巍峨的太行山脉到秀美的汾河谷地，从古老的石窟寺庙到现代的城市风貌，
-              三晋大地处处展现着深厚的历史文化底蕴和独特的自然风光。
+              点击下方进入山东两个展馆：F3 非遗技艺、F4 山东展馆（本页）。
             </p>
             <div class="action-buttons">
-              <button class="primary-button" @click="showGallery">
-                🖼️ 风光图集
-              </button>
-              <button class="secondary-button" @click="showInfo">
-                📍 景点介绍
-              </button>
-              <button class="secondary-button" @click="showGuide">
-                🗺️ 参观指南
-              </button>
+              <router-link to="/F3" class="primary-button">进入 F3 · 非遗技艺</router-link>
+              <router-link to="/shandong/f4/detail" class="secondary-button">了解详情</router-link>
+              <router-link to="/shandong/f4/interview" class="secondary-button">访谈纪要</router-link>
             </div>
           </div>
         </div>
@@ -54,7 +46,7 @@ export default {
     return {}
   },
   mounted() {
-    document.body.style.backgroundImage = `url(${require('@/assets/images/展厅4.jpg')})`;
+    document.body.style.backgroundImage = `url(${require('@/assets/images/shandong/3层.jpg')})`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "local";
     document.body.style.backgroundSize = "cover";
@@ -65,17 +57,7 @@ export default {
     document.body.style.backgroundAttachment = "";
     document.body.style.backgroundSize = "";
   },
-  methods: {
-    showGallery() {
-      alert('风光图集功能待开发');
-    },
-    showInfo() {
-      alert('景点介绍功能待开发');
-    },
-    showGuide() {
-      alert('参观指南功能待开发');
-    }
-  }
+  methods: {}
 }
 </script>
 

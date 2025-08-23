@@ -2,8 +2,9 @@
   <div class="main-layout">
     <div class="page">
       <main>
-        <div class="top-row px-4">
-          <LoginDisplay />
+        <div class="top-left-nav">
+          <button class="nav-btn" @click="goBack">返回</button>
+          <router-link to="/homepage" class="nav-btn link">首页</router-link>
         </div>
         <article class="content px-4">
           <slot></slot>
@@ -14,12 +15,16 @@
 </template>
 
 <script>
-import LoginDisplay from '@/components/shanxi/LoginDisplay.vue'
-
 export default {
   name: 'MainLayout',
-  components: {
-    LoginDisplay
+  methods: {
+    goBack() {
+      if (window.history.length > 1) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push('/homepage')
+      }
+    }
   }
 }
 </script>
@@ -36,14 +41,9 @@ export default {
   position: relative;
 }
 
-.top-row {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-}
+.top-left-nav { position: fixed; top: 0; left: 0; z-index: 1000; display: flex; gap: 8px; padding: 10px; }
+.nav-btn { background: rgba(0,0,0,.5); color: #fff; border: 1px solid rgba(255,255,255,.4); padding: 6px 12px; border-radius: 6px; cursor: pointer; text-decoration: none; }
+.nav-btn:hover { background: rgba(0,0,0,.65); color: #fff; text-decoration: none; }
 
 .px-4 {
   padding-left: 1.5rem;

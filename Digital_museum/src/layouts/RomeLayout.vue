@@ -9,7 +9,7 @@
             <button @click="goBack" class="back-button">
               ← 返回
             </button>
-            <router-link to="/" class="home-button">
+            <router-link to="/homepage" class="home-button">
               🏠 首页
             </router-link>
           </div>
@@ -41,7 +41,11 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.go(-1);
+      if (window.history.length > 1) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push('/homepage')
+      }
     }
   }
 }

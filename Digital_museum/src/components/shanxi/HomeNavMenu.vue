@@ -3,9 +3,9 @@
     <nav class="flex-column">
       <div class="nav-item px-3">
         <router-link 
-          to="/" 
+          to="/homepage" 
           class="nav-link" 
-          :class="{ active: $route.path === '/' }"
+          :class="{ active: $route.path === '/homepage' }"
           exact
         >
           <span class="oi oi-home" aria-hidden="true"></span> 首页
@@ -22,20 +22,29 @@
       
       <div class="nav-item px-3">
         <router-link 
-          to="/F2" 
+          to="/F1" 
           class="nav-link nav-sub"
         >
-          F2 · 运斤成风
+          F1 · 运斤成风
         </router-link>
       </div>
       
       <div class="nav-item px-3">
         <router-link 
+          to="/F2" 
+          class="nav-link nav-sub"
+        >
+          F2 · 非遗珍馐
+        </router-link>
+
+      <div class="nav-item px-3">
+        <router-link 
           to="/F3" 
           class="nav-link nav-sub"
         >
-          F3 · 非遗珍馐
+          F3 · 非遗技艺（山东）
         </router-link>
+      </div>
       </div>
       
       <div class="nav-item px-3">
@@ -43,7 +52,7 @@
           to="/F4" 
           class="nav-link nav-sub"
         >
-          F4 · 三晋揽胜
+          F4 · 山东展馆
         </router-link>
       </div>
     </nav>

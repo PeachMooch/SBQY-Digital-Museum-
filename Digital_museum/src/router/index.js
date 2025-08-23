@@ -45,64 +45,69 @@ const routes = [
     meta: { title: '山西数字博物馆 · 导览' },
     component: () => import(/* webpackChunkName: "shanxi-index" */ '../views/shanxi/ShanxiIndexPage.vue')
   },
-  // F2展厅 - 运斤成风
+  // F1展厅 - 运斤成风（原F2）
   {
-    path: '/F2',
-    name: 'f2-home',
-    meta: { title: 'F2 展厅 · 运斤成风' },
-    component: () => import(/* webpackChunkName: "f2" */ '../views/shanxi/exhibitions/F2HomePage.vue')
+    path: '/F1',
+    name: 'f1-home',
+    meta: { title: 'F1 展厅 · 运斤成风' },
+    component: () => import(/* webpackChunkName: "f1" */ '../views/shanxi/exhibitions/F2HomePage.vue')
   },
   {
     path: '/Detail1',
     name: 'f2-detail1',
-    meta: { title: 'F2 展厅 · 展项一' },
+    meta: { title: 'F1 展厅 · 展项一' },
     component: () => import(/* webpackChunkName: "f2-detail1" */ '../views/shanxi/exhibitions/F2Detail1.vue')
   },
   {
     path: '/Detail2',
     name: 'f2-detail2',
-    meta: { title: 'F2 展厅 · 展项二' },
+    meta: { title: 'F1 展厅 · 展项二' },
     component: () => import(/* webpackChunkName: "f2-detail2" */ '../views/shanxi/exhibitions/F2Detail2.vue')
   },
   {
     path: '/Detail3',
     name: 'f2-detail3',
-    meta: { title: 'F2 展厅 · 展项三' },
+    meta: { title: 'F1 展厅 · 展项三' },
     component: () => import(/* webpackChunkName: "f2-detail3" */ '../views/shanxi/exhibitions/F2Detail3.vue')
   },
-  // F3展厅 - 非遗珍馐
+  // F2展厅 - 非遗珍馐（原F3）
   {
-    path: '/F3',
-    name: 'f3-home',
-    meta: { title: 'F3 展厅 · 非遗珍馐' },
-    component: () => import(/* webpackChunkName: "f3" */ '../views/shanxi/exhibitions/F3HomePage.vue')
+    path: '/F2',
+    name: 'f2-food',
+    meta: { title: 'F2 展厅 · 非遗珍馐' },
+    component: () => import(/* webpackChunkName: "f2-food" */ '../views/shanxi/exhibitions/F3HomePage.vue')
   },
   {
     path: '/Detail11',
     name: 'f3-detail1',
-    meta: { title: 'F3 展厅 · 展项一' },
+    meta: { title: 'F2 展厅 · 展项一' },
     component: () => import(/* webpackChunkName: "f3-detail1" */ '../views/shanxi/exhibitions/F3Detail1.vue')
   },
   {
     path: '/Detail12',
     name: 'f3-detail2',
-    meta: { title: 'F3 展厅 · 展项二' },
+    meta: { title: 'F2 展厅 · 展项二' },
     component: () => import(/* webpackChunkName: "f3-detail2" */ '../views/shanxi/exhibitions/F3Detail2.vue')
   },
   {
     path: '/Detail13',
     name: 'f3-detail3',
-    meta: { title: 'F3 展厅 · 展项三' },
+    meta: { title: 'F2 展厅 · 展项三' },
     component: () => import(/* webpackChunkName: "f3-detail3" */ '../views/shanxi/exhibitions/F3Detail3.vue')
   },
 
-  // F4展厅 - 三晋揽胜
+  // F4展厅 - 山东展馆入口
   {
     path: '/F4',
     name: 'f4-home',
-    meta: { title: 'F4 展厅 · 三晋揽胜' },
+    meta: { title: 'F4 展厅 · 山东展馆' },
     component: () => import(/* webpackChunkName: "f4" */ '../views/shanxi/exhibitions/F4HomePage.vue')
   },
+
+  // 山东展馆 F3（非遗技艺）与子页
+  { path: '/F3', name: 'sd-f3', meta: { title: 'F3 展厅 · 非遗技艺（山东）' }, component: () => import('../views/shanxi/exhibitions/ShandongF3HomePage.vue') },
+  { path: '/shandong/f3/detail', name: 'sd-f3-detail', meta: { title: '山东 · 了解详情' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Detail.vue') },
+  { path: '/shandong/f3/interview', name: 'sd-f3-interview', meta: { title: '山东 · 访谈纪要' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Interview.vue') },
 
   // 农业非遗特展
   {
