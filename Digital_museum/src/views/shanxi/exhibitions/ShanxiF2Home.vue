@@ -3,7 +3,7 @@
     <div class="f3-home-page">
       <!-- 简化的标题 -->
       <div class="simple-title">
-        <h1>F3 · 非遗珍馐</h1>
+        <h1>F2 · 非遗珍馐</h1>
         <p>舌尖上的非物质文化遗产</p>
       </div>
       

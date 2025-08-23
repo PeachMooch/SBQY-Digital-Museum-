@@ -3,7 +3,7 @@
     <div class="f2-home-page">
       <!-- 简化的标题 -->
       <div class="simple-title">
-        <h1>F2 · 运斤成风</h1>
+        <h1>F1 · 运斤成风</h1>
         <p>传承千年的工艺技术与匠心精神</p>
       </div>
       

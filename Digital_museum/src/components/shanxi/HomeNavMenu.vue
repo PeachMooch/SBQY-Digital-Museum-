@@ -49,7 +49,7 @@
           to="/F3" 
           class="nav-link nav-sub"
         >
-          F3 · 非遗技艺（山东）
+          F3 · 非遗技艺
         </router-link>
       </div>
       
@@ -58,7 +58,7 @@
           to="/F4" 
           class="nav-link nav-sub"
         >
-          F4 · 山东展馆
+          F4 · 齐鲁遗珍
         </router-link>
       </div>
     </nav>

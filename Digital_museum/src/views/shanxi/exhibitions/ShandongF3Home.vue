@@ -3,7 +3,7 @@
     <div class="f3-home-page">
       <!-- 简化的标题 -->
       <div class="simple-title">
-        <h1>F3 · 非遗技艺（山东）</h1>
+        <h1>F3 · 非遗技艺</h1>
         <p>胶东地区的传统技艺与匠心精神</p>
       </div>
       

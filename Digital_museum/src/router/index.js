@@ -105,7 +105,7 @@ const routes = [
   },
 
   // 山东展馆 F3（非遗技艺）与子页
-  { path: '/F3', name: 'sd-f3', meta: { title: 'F3 展厅 · 非遗技艺（山东）' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Home.vue') },
+  { path: '/F3', name: 'sd-f3', meta: { title: 'F3 展厅 · 非遗技艺' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Home.vue') },
   { path: '/shandong/f3/detail', name: 'sd-f3-detail', meta: { title: '山东 · 了解详情' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Details.vue') },
   { path: '/shandong/f3/interview', name: 'sd-f3-interview', meta: { title: '山东 · 访谈纪要' }, component: () => import('../views/shanxi/exhibitions/ShandongF3Interviews.vue') },
 

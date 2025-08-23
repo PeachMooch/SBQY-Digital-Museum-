@@ -3,7 +3,7 @@
     <div class="f4-home-page">
       <!-- 简化的标题 -->
       <div class="simple-title">
-        <h1>F4 · 三晋揽胜</h1>
+        <h1>F4 · 齐鲁遗珍</h1>
         <p>山东展馆入口</p>
       </div>
       
@@ -12,13 +12,13 @@
         <div class="featured-item">
           <div class="item-image">
             <img 
-              :src="require('@/assets/images/shandong/00.png')" 
-              alt="山东展板" 
+              :src="require('@/assets/images/shandong/7.png')" 
+              alt="齐鲁遗珍导览图" 
               ref="mainImage"
             />
           </div>
           <div class="item-content">
-            <h2>🏛️ 展厅亮点：山东 · 非遗主题</h2>
+            <h2>🏛️ 展厅亮点：齐鲁遗珍</h2>
             <p>
               点击下方进入山东两个展馆：F3 非遗技艺、F4 山东展馆（本页）。
             </p>
