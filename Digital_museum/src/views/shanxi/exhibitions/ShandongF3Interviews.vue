@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="detail-page">
       <header class="header">访谈纪要</header>
-      <div class="card">
+      <div class="card scrollable">
         <img :src="require('@/assets/images/shandong/3.png')" class="v-img" alt="3" />
         <img :src="require('@/assets/images/shandong/4.png')" class="v-img" alt="4" />
         <img :src="require('@/assets/images/shandong/6.png')" class="v-img" alt="6" />
@@ -30,6 +30,11 @@ export default {
 .header { font-size: 28px; font-weight: 700; margin: 10px 0 16px; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.45) }
 .card { background: rgba(255,255,255,.92); border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2); max-width: 980px; margin: 0 auto }
 .v-img { width: 100%; display: block; margin-bottom: 16px; border-radius: 8px }
+
+.scrollable { max-height: 72vh; overflow: auto; }
+.scrollable::-webkit-scrollbar { width: 10px; }
+.scrollable::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 8px; }
+.scrollable::-webkit-scrollbar-track { background: transparent; }
 </style>
 
 
