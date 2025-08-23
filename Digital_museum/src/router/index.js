@@ -32,7 +32,7 @@ const routes = [
     meta: { title: '社会实践 · 成果展示' },
     component: () => import(/* webpackChunkName: "results" */ '../views/PracticeResultsPage.vue')
   },
-  // 山西数字博物馆主要页面路由
+  // 数字博物馆主要页面路由
   {
     path: '/home',
     name: 'digital-museum-home',
