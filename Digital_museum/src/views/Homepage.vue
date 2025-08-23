@@ -94,6 +94,7 @@
                 class="team-logo" 
                 :src="teamInfo.logo" 
                 alt="团队 Logo"
+                v-show="!isLoading"
               />
               <div>
                 <h3 class="team-name">{{ teamInfo.name }}</h3>
@@ -675,7 +676,7 @@ export default {
   methods: {
     setMonth(m) { this.activeMonth = m; },
     
-    // 开始加载流程
+    // 开始加载流程（真实加载：图片、CDN脚本、地图数据、Swiper实例）
     async startLoading() {
       try {
         // 步骤1: 预加载图片 (30%)
@@ -694,9 +695,7 @@ export default {
         this.updateLoadingProgress(100);
         
         // 延迟一点时间让用户看到100%，然后隐藏加载界面
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 300);
+        setTimeout(() => { this.isLoading = false; }, 200);
         
       } catch (error) {
         // 即使出错也要隐藏加载界面
@@ -760,7 +759,7 @@ export default {
     loadHomepageAssets() {
       return new Promise((resolve) => {
         let loadedCount = 0;
-        const totalAssets = 3; // Swiper CSS, ECharts+Map, Swiper JS
+        const totalAssets = 3; // Swiper CSS, ECharts(+地图), Swiper JS
         
         const checkComplete = () => {
           loadedCount++;

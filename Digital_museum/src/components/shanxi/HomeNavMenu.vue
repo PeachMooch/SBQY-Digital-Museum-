@@ -14,7 +14,7 @@
       
       <div class="nav-item px-3">
         <div class="nav-link nav-category">
-          <span class="oi oi-list-rich" aria-hidden="true"></span> 展厅分区
+          <span class="oi oi-list-rich" aria-hidden="true"></span> 山西展厅
         </div>
       </div>
       
@@ -36,6 +36,13 @@
         >
           F2 · 非遗珍馐
         </router-link>
+      </div>
+
+      <div class="nav-item px-3">
+        <div class="nav-link nav-category">
+          <span class="oi oi-list-rich" aria-hidden="true"></span> 山东展馆
+        </div>
+      </div>
 
       <div class="nav-item px-3">
         <router-link 
@@ -44,7 +51,6 @@
         >
           F3 · 非遗技艺（山东）
         </router-link>
-      </div>
       </div>
       
       <div class="nav-item px-3">

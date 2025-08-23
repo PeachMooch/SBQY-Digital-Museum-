@@ -14,7 +14,16 @@
 
 <script>
 import MainLayout from '@/layouts/MainLayout.vue'
-export default { name: 'ShandongF3Interview', components: { MainLayout } }
+export default { 
+  name: 'ShandongF3Interview', 
+  components: { MainLayout },
+  mounted() {
+    document.body.style.backgroundImage = `url(${require('@/assets/images/shandong/微信图片_2025-08-23_141956_811.png')})`
+    document.body.style.backgroundRepeat = 'no-repeat'
+    document.body.style.backgroundSize = 'cover'
+  },
+  destroyed() { document.body.style.backgroundImage = '' }
+}
 </script>
 
 <style scoped>
@@ -22,5 +31,6 @@ export default { name: 'ShandongF3Interview', components: { MainLayout } }
 .card { background: rgba(255,255,255,.92); border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2); max-width: 980px; margin: 0 auto }
 .v-img { width: 100%; display: block; margin-bottom: 16px; border-radius: 8px }
 </style>
+
 
 
