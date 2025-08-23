@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     // 设置页面背景
-    document.body.style.backgroundImage = `url(${require('@/assets/images/4.jpg')})`;
+    document.body.style.backgroundImage = `url(${require('@/assets/images/博物馆首页.png')})`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "local";
     document.body.style.backgroundSize = "cover";

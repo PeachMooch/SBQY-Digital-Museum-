@@ -39,12 +39,7 @@ const routes = [
     meta: { title: '山西数字博物馆 · 首页' },
     component: () => import(/* webpackChunkName: "shanxi-home" */ '../views/shanxi/ShanxiHomePage.vue')
   },
-  {
-    path: '/index',
-    name: 'shanxi-index',
-    meta: { title: '山西数字博物馆 · 导览' },
-    component: () => import(/* webpackChunkName: "shanxi-index" */ '../views/shanxi/ShanxiIndexPage.vue')
-  },
+  // 已不需要单独的导览页（/index），删除该路由
   // F1展厅 - 运斤成风（原F2）
   {
     path: '/F1',

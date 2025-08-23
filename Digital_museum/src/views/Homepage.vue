@@ -1127,8 +1127,8 @@ export default {
       const shandongCities = ['淄博', '潍坊', '烟台'];
       
       if (shanxiCities.includes(normalizedCityName)) {
-        // 跳转到山西数字博物馆
-        this.$router.push('/index');
+        // 跳转到山西数字博物馆首页（带导航栏）
+        this.$router.push('/home');
       } else if (shandongCities.includes(normalizedCityName)) {
         // 山东博物馆暂未开发，显示提示
         alert(`${normalizedCityName}对应的山东数字博物馆正在开发中，敬请期待！`);
