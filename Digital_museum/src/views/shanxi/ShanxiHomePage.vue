@@ -22,7 +22,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import HomeNavMenu from '@/components/shanxi/HomeNavMenu.vue'
 
 export default {
-  name: 'ShanxiHomePageView',
+  name: 'DigitalMuseumHome',
   components: {
     MainLayout,
     HomeNavMenu

@@ -35,13 +35,9 @@
                 ✨ 实践队风采展示
               </router-link>
               <span class="text-gray-400">|</span>
-              <router-link to="/index" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
-                山西数字博物馆
+              <router-link to="/home" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
+                数字博物馆
               </router-link>
-              <span class="text-gray-400">|</span>
-              <button class="px-3 py-2 text-sm font-medium text-gray-400 cursor-not-allowed" disabled>
-                山东数字博物馆 (待开发)
-              </button>
               <span class="text-gray-400">|</span>
               <router-link to="/agriculture" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
                 农业非遗特展

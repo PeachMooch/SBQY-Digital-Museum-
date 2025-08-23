@@ -35,8 +35,8 @@ const routes = [
   // 山西数字博物馆主要页面路由
   {
     path: '/home',
-    name: 'shanxi-home',
-    meta: { title: '山西数字博物馆 · 首页' },
+    name: 'digital-museum-home',
+    meta: { title: '数字博物馆 · 首页' },
     component: () => import(/* webpackChunkName: "shanxi-home" */ '../views/shanxi/ShanxiHomePage.vue')
   },
   // 已不需要单独的导览页（/index），删除该路由
