@@ -38,7 +38,7 @@
 import MainLayout from '@/layouts/MainLayout.vue'
 
 export default {
-  name: 'F4HomePageView',
+  name: 'ShandongF4Home',
   components: {
     MainLayout
   },

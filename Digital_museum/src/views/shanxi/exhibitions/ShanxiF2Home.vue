@@ -46,7 +46,7 @@
 import MainLayout from '@/layouts/MainLayout.vue'
 
 export default {
-  name: 'F3HomePageView',
+  name: 'ShanxiF2Home',
   components: {
     MainLayout
   },

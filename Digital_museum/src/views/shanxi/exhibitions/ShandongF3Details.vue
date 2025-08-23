@@ -14,7 +14,7 @@
 <script>
 import MainLayout from '@/layouts/MainLayout.vue'
 export default { 
-  name: 'ShandongF3Detail', 
+  name: 'ShandongF3Details', 
   components: { MainLayout },
   mounted() {
     document.body.style.backgroundImage = `url(${require('@/assets/images/shandong/微信图片_2025-08-23_141907_562.png')})`

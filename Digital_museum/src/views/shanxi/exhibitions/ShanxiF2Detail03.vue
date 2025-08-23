@@ -51,7 +51,7 @@
 import Rome2Layout from '@/layouts/Rome2Layout.vue'
 
 export default {
-  name: 'F3Detail3View',
+  name: 'ShanxiF2Detail03',
   components: {
     Rome2Layout
   },

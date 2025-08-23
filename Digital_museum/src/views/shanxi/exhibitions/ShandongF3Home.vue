@@ -16,7 +16,7 @@
 import MainLayout from '@/layouts/MainLayout.vue'
 
 export default {
-  name: 'ShandongF3HomePage',
+  name: 'ShandongF3Home',
   components: { MainLayout },
   mounted() {
     document.body.style.backgroundImage = `url(${require('@/assets/images/shandong/3层.jpg')})`;
