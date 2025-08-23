@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage
+*.lcov
+.nyc_output
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+
+# Cache
+.cache/
+.vite/
+.eslintcache
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Package output
+*.tgz
+.npm
+.yarn-integrity
+
+# Editors
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+tmp/
+temp/
+
+# Local npm cache folders that appeared in this project
+刚才创建的node_cache文件夹的路径/
+
+
