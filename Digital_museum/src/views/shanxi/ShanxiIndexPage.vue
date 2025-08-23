@@ -38,7 +38,7 @@ export default {
     // 动态设置背景图片
     const bgElement = this.$el.querySelector('.index-background');
     if (bgElement) {
-      bgElement.style.backgroundImage = `url(${require('@/assets/images/首页.jpg')})`;
+      bgElement.style.backgroundImage = `url(${require('@/assets/images/博物馆首页.png')})`;
     }
   },
   destroyed() {
