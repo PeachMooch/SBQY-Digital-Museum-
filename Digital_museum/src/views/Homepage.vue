@@ -15,7 +15,7 @@
     </div>
     <!-- 顶部导航栏 -->
     <header class="header-glass fixed top-0 left-0 right-0 transition-transform duration-300 ease-in-out z-50">
-      <div class="container mx-auto px-4">
+      <div class="w-full px-2 md:px-4">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
             <router-link to="/homepage" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
@@ -35,9 +35,13 @@
                 ✨ 实践队风采展示
               </router-link>
               <span class="text-gray-400">|</span>
-              <router-link to="/home" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
-                数字博物馆
+              <router-link to="/index" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
+                山西数字博物馆
               </router-link>
+              <span class="text-gray-400">|</span>
+              <button class="px-3 py-2 text-sm font-medium text-gray-400 cursor-not-allowed" disabled>
+                山东数字博物馆 (待开发)
+              </button>
               <span class="text-gray-400">|</span>
               <router-link to="/agriculture" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
                 农业非遗特展
@@ -60,7 +64,7 @@
         <div class="swiper-container" ref="swiperContainer">
           <div class="swiper-wrapper">
             <!-- 第一张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt1})` }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt1})`, backgroundPosition: 'center 70%' }">
             </div>
             
             <!-- 第二张轮播图 -->
@@ -68,7 +72,11 @@
             </div>
             
             <!-- 第三张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt3})` }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt3})`, backgroundPosition: 'center 70%' }">
+            </div>
+
+            <!-- 第四张轮播图 -->
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt4})` }">
             </div>
           </div>
           
@@ -81,63 +89,30 @@
         </div>
       </div>
       
-      <!-- 团队简介 -->
-      <section class="team-section" id="team">
-        <div class="container mx-auto px-4">
-          <div class="team-hero">
-            <div class="team-brand">
-              <img 
-                class="team-logo" 
-                :src="teamInfo.logo" 
-                alt="团队 Logo"
-                v-show="!isLoading"
-              />
-              <div>
-                <h3 class="team-name">{{ teamInfo.name }}</h3>
-                <p class="team-slogan">{{ teamInfo.slogan }}</p>
-              </div>
-            </div>
-            <p class="team-intro">{{ teamInfo.intro }}</p>
-          </div>
+      <!-- 愿景与使命：独立分区 -->
+      <MissionVision
+        :vision-text="''"
+        :mission-text="''"
+        :timeline="mission.timeline"
+        :combined-text="''"
+        :show-title="false"
+      >
+        <template #aside>
+          
+        </template>
+      </MissionVision>
 
-          <div class="team-intro-grid">
-            <div class="team-card">
-              <div class="team-card-title">使命与愿景</div>
-              <p class="team-card-text">
-                以“发现—记录—传播”为路径，守护并活化在地文化记忆；以青年力量推动非遗走入当代生活，助力乡村文化振兴与公共文化服务优化。
-              </p>
-              <ul class="bullet-list">
-                <li>发现：田野走访，定位真实问题与需求</li>
-                <li>记录：标准化方法沉淀可复用知识</li>
-                <li>传播：数字化叙事，促进社会参与</li>
-              </ul>
-            </div>
-
-            <div class="team-card">
-              <div class="team-card-title">指导老师</div>
-              <ul class="advisors-list">
-                <li v-for="a in advisors" :key="a.name" class="advisor-item">
-                  <div class="avatar">👩‍🏫</div>
-                  <div>
-                    <div class="name">{{ a.name }}</div>
-                    <div class="meta">{{ a.title }}</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div class="team-card">
-              <div class="team-card-title">成员与分工</div>
-              <ul class="members-list">
-                <li v-for="m in teamMembers" :key="m.name" class="member-item">
-                  <span class="tag">{{ m.role }}</span>
-                  <span class="name">{{ m.name }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <!-- 愿景与使命下方的介绍图片 -->
+      <div class="mission-intro-image-wrap">
+        <img :src="introductionImage" alt="introduction" />
+        <div class="mission-intro-text">
+          <h3 class="mission-intro-title">愿景和使命</h3>
+          <div class="mission-intro-one">{{ mission.oneLiner }}</div>
         </div>
-      </section>
+      </div>
+
+      <!-- 团队介绍：独立分区（分层架构 + 抽屉详情） -->
+      <TeamOverview id="team" :leader="team.leader" :groups="team.groups" />
 
       <!-- 社会实践成果展示区域 -->
       <section class="map-section">
@@ -329,8 +304,9 @@
       <section class="heritage-projects-section">
         <div class="container mx-auto px-4">
           <h3 class="section-title">非遗项目详览</h3>
+          <div class="heritage-layout">
           
-          <!-- 项目分类展示 -->
+          <!-- 项目分类展示（左列，竖向列表） -->
           <div class="heritage-categories">
             <!-- 联合国级 -->
             <div class="heritage-category">
@@ -416,22 +392,9 @@
               </div>
             </div>
           </div>
-
-          <!-- 地域分布总结 -->
-          <div class="heritage-summary">
-            <div class="summary-item">
-              <span class="summary-number">10</span>
-              <span class="summary-label">山东省项目</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-number">1</span>
-              <span class="summary-label">山西省项目</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-number">11</span>
-              <span class="summary-label">总计项目</span>
-            </div>
+          
           </div>
+          
         </div>
       </section>
 
@@ -486,100 +449,9 @@
         </div>
       </section>
 
-      <!-- 重点成果 - 交错图文块 -->
-      <section class="features-alt">
-        <div class="container mx-auto px-4">
-          <div class="feature-row">
-            <div class="feature-text">
-              <h4>田野访谈 · 真实声音</h4>
-              <p>以“人”为中心的田野工作，围绕非遗传承、村落记忆与产业振兴三大主题，采集可追溯的口述史与生活史资料，为后续分析与展示提供第一手证据。</p>
-              <ul class="feature-list">
-                <li>采集范围：2 省 3 市 27 个非遗项目，典型样本全覆盖</li>
-                <li>核心方法：半结构化访谈 + 参与式观察 + 资料校核</li>
-                <li>证据形态：音频 / 视频 / 照片 / 文字四重存证，元数据规范化</li>
-              </ul>
-              <div class="feature-badges">
-                <span class="badge badge-red">128+ 深度访谈</span>
-                <span class="badge">530+ 影像素材</span>
-                <span class="badge">15+ 主题专题</span>
-              </div>
-              <div class="feature-cta">
-                <button class="btn btn-primary" @click="showPracticeResults">查看访谈节选</button>
-                <button class="btn btn-ghost">查看样本画像</button>
-              </div>
-            </div>
-            <div class="feature-media">
-              <img :src="require('@/assets/images/home-03-270x360.jpg')" alt="访谈现场">
-            </div>
-          </div>
+      
 
-          <div class="feature-row reverse">
-            <div class="feature-text">
-              <h4>报告体系 · 数据驱动</h4>
-              <p>从数据到洞见：以标准化流程完成“采集—清洗—编码—分析—可视化—撰写—发布”，形成可复用的研究框架与实践工具包。</p>
-              <div class="progress-wrap">
-                <div class="progress-item">
-                  <span>基础调研</span>
-                  <div class="progress-bar"><i style="width: 88%"></i></div>
-                </div>
-                <div class="progress-item">
-                  <span>口述史整理</span>
-                  <div class="progress-bar"><i style="width: 72%"></i></div>
-                </div>
-                <div class="progress-item">
-                  <span>报告撰写</span>
-                  <div class="progress-bar"><i style="width: 64%"></i></div>
-                </div>
-              </div>
-              <div class="feature-badges">
-                <span class="badge badge-red">开放数据集</span>
-                <span class="badge">可视化模版</span>
-                <span class="badge">政策建议摘要</span>
-              </div>
-              <div class="feature-cta">
-                <button class="btn btn-primary">下载总结报告</button>
-                <button class="btn btn-ghost">查看方法论</button>
-              </div>
-            </div>
-            <div class="feature-media">
-              <img :src="require('@/assets/images/home-02-270x360.jpg')" alt="报告撰写">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 项目发展（参考发展历程样式） -->
-      <section class="timeline-section timeline-vertical">
-        <div class="container mx-auto px-4">
-          <h3 class="section-title">项目发展</h3>
-          <div class="timeline-grid">
-            <!-- 主列 -->
-            <div class="timeline-main">
-              <div class="year-large">2024</div>
-              <ul class="timeline-list">
-                <li v-for="(item,idx) in displayedTimelineItems" :key="idx" class="tlv-item">
-                  <div class="tlv-title">{{ item.title }}</div>
-                  <div class="tlv-meta">{{ item.meta }}</div>
-                  <div class="tlv-desc">{{ item.desc }}</div>
-                </li>
-                <li v-if="!displayedTimelineItems.length" class="tlv-item">
-                  <div class="tlv-title">本月暂无事件</div>
-                  <div class="tlv-meta">{{ activeMonth }} 月</div>
-                  <div class="tlv-desc">请切换右侧月份查看其他阶段进展。</div>
-                </li>
-              </ul>
-              <div class="timeline-more">展开更多</div>
-              </div>
-
-            <!-- 右侧年份导航 -->
-            <aside class="year-side">
-              <ul>
-                <li v-for="m in timelineMonths" :key="m" :class="{active: m===activeMonth}" @click="setMonth(m)">{{ m }}月</li>
-              </ul>
-            </aside>
-          </div>
-        </div>
-      </section>
+      
     </main>
     
     <!-- 页脚（内容由你后续补充） -->
@@ -588,7 +460,10 @@
         <div class="footer-inner">
           <div class="footer-brand">
             <div class="brand-name">天津大学管理与经济学部</div>
-            <div class="brand-desc">内容待补充</div>
+            <div class="footer-team">
+              <img :src="require('@/assets/images/practice-team-logo.png')" alt="溯本求源 | 文润经心" class="footer-logo">
+              <span class="footer-team-text">溯本求源 <span class="sep">|</span> 文润经心</span>
+            </div>
           </div>
           <div class="footer-content"><!-- 你可以在此处补充页脚详细内容 --></div>
         </div>
@@ -598,8 +473,12 @@
 </template>
 
 <script>
+import MissionVision from '@/components/MissionVision.vue'
+import TeamOverview from '@/components/TeamOverview.vue'
+
 export default {
   name: 'HomePageView',
+  components: { MissionVision, TeamOverview },
   data() {
     return {
       isLoading: true,
@@ -612,40 +491,49 @@ export default {
       cityChart: null,
       currentMapLevel: 'china', // china | province
       currentProvince: null,
+      introductionImage: process.env.BASE_URL + 'homepage/images/introduction.jpg',
       slideImages: {
-        ppt1: require('@/assets/images/ppt1.jpg'),
-        ppt2: require('@/assets/images/ppt2.jpg'),
-        ppt3: require('@/assets/images/ppt3.jpg')
+        ppt1: process.env.BASE_URL + 'homepage/images/home_ppt1.jpg',
+        ppt2: process.env.BASE_URL + 'homepage/images/home_ppt2.jpg',
+        ppt3: process.env.BASE_URL + 'homepage/images/home_ppt3.jpg',
+        ppt4: process.env.BASE_URL + 'homepage/images/home_ppt4.jpg'
       },
-      // 团队信息
-      teamInfo: {
-        name: '溯本求源 | 文润经心',
-        slogan: '以数叙事，见证非遗的当代生命力',
-        intro: '我们是一支跨专业青年团队，聚焦非遗数字化、社区营造与公共文化服务，通过田野采集、可视化与故事化呈现，推动“看见—理解—行动”的社会参与。',
-        logo: require('@/assets/images/logo.png')
+      // 顶部横幅/行动按钮
+      banner: {
+        tagline: '以数叙事，见证非遗的当代生命力',
+        actions: [
+          { text: '了解愿景', to: '#mission' },
+          { text: '查看团队', to: '#team' }
+        ]
       },
-      advisors: [
-        { name: '张老师', title: '文化遗产研究所 副教授' },
-        { name: '李老师', title: '公共管理学院 讲师' }
-      ],
-      teamMembers: [
-        { name: '王同学', role: '项目统筹' },
-        { name: '刘同学', role: '方法设计' },
-        { name: '陈同学', role: '数据可视化' },
-        { name: '赵同学', role: '影像记录' },
-        { name: '孙同学', role: '调研与撰写' }
-      ],
-      // 时间轴数据与状态
-      activeMonth: new Date().getMonth() + 1,
-      timelineMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
-      timelineDataByMonth: {
-        3: [{ title: '立项与路线设计', meta: '3 月', desc: '确定两省三市点位，完善访谈提纲与采集规范。' }],
-        5: [{ title: '田野踏勘与采集', meta: '5–6 月', desc: '完成核心样本访谈，收集音视频与实物影像素材。' }],
-        6: [{ title: '田野踏勘与采集', meta: '5–6 月', desc: '完成核心样本访谈，收集音视频与实物影像素材。' }],
-        7: [{ title: '整理与撰写', meta: '7–8 月', desc: '形成阶段报告与可视化图表，打磨展陈文案。' }],
-        8: [{ title: '整理与撰写', meta: '7–8 月', desc: '形成阶段报告与可视化图表，打磨展陈文案。' }],
-        9: [{ title: '数字化呈现', meta: '9 月', desc: '上线数字展馆原型，发布公开成果。' }]
-      }
+      // 愿景使命数据
+      mission: {
+        vision: '守护并活化在地文化记忆，推动社会参与',
+        mission: '以发现—记录—传播为路径，促公共文化服务优化',
+        oneLiner: '守护与活化在地文化记忆，以发现—记录—传播赋能公共文化。',
+        methods: [
+          { title: '发现', points: ['田野走访', '问题定位'], icon: '🔍' },
+          { title: '记录', points: ['标准化方法沉淀', '图像/文本/数据'], icon: '📝' },
+          { title: '传播', points: ['数字化叙事', '参与式展示'], icon: '📣' }
+        ],
+        timeline: []
+      },
+      // 团队分层结构
+      team: {
+        leader: { name: '指导老师', title: '总负责人', avatar: require('@/assets/images/practice-team-logo.png') },
+        groups: [
+          { key: 'digital', name: '数字组', desc: '数据治理与可视化', tags: ['数据','可视化'], members: [{ name: '成员A', role: '数据工程' }] },
+          { key: 'photo', name: '摄影组', desc: '影像采集与编辑', tags: ['影像','拍摄'], members: [{ name: '成员B', role: '摄影' }] },
+          { key: 'promo', name: '宣传组', desc: '品牌与传播', tags: ['新媒体','海报'], members: [{ name: '成员C', role: '运营' }] },
+          { key: 'research', name: '调研组', desc: '田野与文献研究', tags: ['方法','访谈'], members: [{ name: '成员D', role: '调研' }] },
+          { key: 'ops', name: '事务组', desc: '后勤与协调', tags: ['行政','对接'], members: [{ name: '成员E', role: '事务' }] },
+          { key: 'thinktank', name: '智囊团', desc: '策略与顾问', tags: ['策略','评审'], members: [{ name: '成员F', role: '顾问' }] }
+        ]
+      },
+
+      // 兼容旧用法的展示块（已不使用卡片，仅保留以防回退）
+      missionBlocks: [],
+      
     }
   },
   mounted() {
@@ -655,12 +543,9 @@ export default {
     document.body.scrollTop = 0;
     
     this.startLoading();
+    this.missionBlocks = this.mission.methods.map(m => ({ title: m.title, points: m.points, icon: m.icon }))
   },
-  computed: {
-    displayedTimelineItems() {
-      return this.timelineDataByMonth[this.activeMonth] || [];
-    }
-  },
+  computed: {},
   beforeDestroy() {
     if (this.swiper) {
       this.swiper.destroy();
@@ -670,9 +555,8 @@ export default {
     }
   },
   methods: {
-    setMonth(m) { this.activeMonth = m; },
     
-    // 开始加载流程（真实加载：图片、CDN脚本、地图数据、Swiper实例）
+    // 开始加载流程
     async startLoading() {
       try {
         // 步骤1: 预加载图片 (30%)
@@ -691,7 +575,9 @@ export default {
         this.updateLoadingProgress(100);
         
         // 延迟一点时间让用户看到100%，然后隐藏加载界面
-        setTimeout(() => { this.isLoading = false; }, 200);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
         
       } catch (error) {
         // 即使出错也要隐藏加载界面
@@ -727,6 +613,7 @@ export default {
           this.slideImages.ppt1,
           this.slideImages.ppt2,
           this.slideImages.ppt3,
+          this.slideImages.ppt4,
           require('@/assets/images/practice-team-logo.png'),
           require('@/assets/images/logo.png')
         ];
@@ -755,7 +642,7 @@ export default {
     loadHomepageAssets() {
       return new Promise((resolve) => {
         let loadedCount = 0;
-        const totalAssets = 3; // Swiper CSS, ECharts(+地图), Swiper JS
+        const totalAssets = 3; // Swiper CSS, ECharts+Map, Swiper JS
         
         const checkComplete = () => {
           loadedCount++;
@@ -1123,8 +1010,8 @@ export default {
       const shandongCities = ['淄博', '潍坊', '烟台'];
       
       if (shanxiCities.includes(normalizedCityName)) {
-        // 跳转到数字博物馆首页（带导航栏）
-        this.$router.push('/home');
+        // 跳转到山西数字博物馆
+        this.$router.push('/index');
       } else if (shandongCities.includes(normalizedCityName)) {
         // 山东博物馆暂未开发，显示提示
         alert(`${normalizedCityName}对应的山东数字博物馆正在开发中，敬请期待！`);
@@ -1306,6 +1193,53 @@ export default {
   font-size: 0.875rem;
   color: #6b7280;
   font-weight: 500;
+}
+
+/* 愿景与使命下方介绍图片样式 */
+.mission-intro-image-wrap {
+  /* 两列布局：左图右文 */
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: center; /* 垂直方向居中 */
+}
+.mission-intro-image-wrap img {
+  display: block;
+  width: 360px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.mission-intro-text {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: #374151;
+  justify-self: center; /* 水平方向居中到右侧空白区域中间 */
+  text-align: center;
+}
+
+.mission-intro-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+.mission-intro-one {
+  font-size: 1.375rem;
+  color: #374151;
+}
+
+@media (max-width: 768px) {
+  .mission-intro-image-wrap {
+    grid-template-columns: 1fr;
+  }
+  .mission-intro-image-wrap img {
+    width: 100%;
+  }
 }
 
 /* 导入原始homepage样式，集成完整CSS变量系统 */
@@ -1546,52 +1480,9 @@ export default {
 @media (max-width: 1024px){ .stats-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (max-width: 640px){ .stats-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 
-/* 交错图文块 */
-.features-alt { padding: 2.5rem 0; }
-.feature-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; margin-bottom: 2.5rem; }
-.feature-row.reverse { grid-template-columns: 1fr 1.2fr; }
-.feature-row.reverse .feature-text { order: 2; }
-.feature-row.reverse .feature-media { order: 1; }
-.feature-text h4 { font-size: 1.5rem; font-weight: 800; margin-bottom: .75rem; }
-.feature-text p { color: #374151; margin-bottom: .75rem; }
-.feature-list { padding-left: 1rem; color: #4b5563; }
-.feature-list li { list-style: disc; margin: .25rem 0; }
-.feature-media img { width: 100%; border-radius: 16px; box-shadow: 0 12px 24px rgba(0,0,0,.08); }
-@media (max-width: 992px){ .feature-row, .feature-row.reverse { grid-template-columns: 1fr; } }
+ 
 
-/* 交错图文块 · 增强元素 */
-.feature-badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
-.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #f3f4f6; color: #374151; font-weight: 700; font-size: .85rem; }
-.badge-red { background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
-.feature-cta { display: flex; gap: .75rem; margin-top: .75rem; }
-.btn { padding: 8px 14px; border-radius: 10px; font-weight: 700; border: 1px solid #e5e7eb; background: #fff; color: #111827; transition: all .2s ease; }
-.btn:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.06); }
-.btn-primary { background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%); color: #fff; border-color: transparent; }
-.btn-ghost { background: #fff; color: #ef4444; border-color: #fecaca; }
-
-/* 项目发展 - 纵向时间轴（参考“发展历程”） */
-.timeline-section { padding: 3rem 0; background: #f5f7fb; }
-.timeline-vertical .timeline-grid { display: grid; grid-template-columns: 1fr 160px; gap: 24px; align-items: start; }
-.timeline-vertical .timeline-main { position: relative; padding-right: 24px; }
-.timeline-vertical .year-large { font-size: 96px; font-weight: 800; color: #374151; letter-spacing: 2px; margin-bottom: 12px; }
-.timeline-vertical .timeline-list { list-style: none; padding: 0; margin: 0; border-left: 3px solid #ef4444; }
-.timeline-vertical .tlv-item { position: relative; padding: 16px 0 16px 24px; }
-.timeline-vertical .tlv-item::before { content: ''; position: absolute; left: -7px; top: 24px; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 0 6px rgba(239,68,68,.12); }
-.timeline-vertical .tlv-title { font-weight: 800; font-size: 18px; color: #111827; margin-bottom: 4px; }
-.timeline-vertical .tlv-meta { color: #ef4444; font-weight: 700; margin-bottom: 4px; }
-.timeline-vertical .tlv-desc { color: #6b7280; line-height: 1.8; }
-.timeline-vertical .timeline-more { margin-top: 12px; color: #ef4444; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-
-.timeline-vertical .year-side { position: sticky; top: 96px; }
-.timeline-vertical .year-side ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-.timeline-vertical .year-side li { color: #9ca3af; cursor: default; font-weight: 700; }
-.timeline-vertical .year-side li.active { color: #ef4444; }
-
-@media (max-width: 1024px){
-  .timeline-vertical .timeline-grid { grid-template-columns: 1fr; }
-  .timeline-vertical .year-side { position: static; order: -1; }
-  .timeline-vertical .year-side ul { flex-direction: row; justify-content: flex-start; gap: 16px; }
-}
+ 
 
 /* 图表区域 */
 .heritage-charts { padding: 2.5rem 0; background: #f9fafb; }
@@ -1805,7 +1696,7 @@ export default {
 
 
 .hero-carousel-section {
-  height: 60vh;
+  height: 50vh;
 }
 
 .swiper-container {
@@ -1998,6 +1889,10 @@ export default {
 .site-footer .footer-inner { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 1100px; margin: 0 auto; }
 .site-footer .brand-name { font-weight: 800; color: #111827; }
 .site-footer .brand-desc { color: #6b7280; }
+.footer-logo { width: 56px; height: 56px; border-radius: 12px; box-shadow: 0 6px 14px rgba(0,0,0,.08); background: #fff; border: 1px solid #eef2f7; object-fit: cover; margin-top: 8px; }
+.footer-team { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.footer-team-text { font-weight: 700; color: #111827; }
+.footer-team-text .sep { color: #ef4444; margin: 0 6px; }
 
 /* 非遗项目展示样式 */
 .heritage-projects-section {
@@ -2005,13 +1900,8 @@ export default {
   background: linear-gradient(135deg, #fef7f0 0%, #ffffff 50%, #f0f9ff 100%);
 }
 
-.heritage-categories {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+.heritage-layout { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+.heritage-categories { display: flex; flex-direction: column; gap: 1rem; }
 
 .heritage-category {
   background: #ffffff;
@@ -2047,11 +1937,7 @@ export default {
   color: #1f2937;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
+.projects-grid { display: flex; flex-direction: column; gap: .75rem; }
 
 .project-card {
   background: #f8fafc;
@@ -2153,9 +2039,7 @@ export default {
     gap: 1.5rem;
   }
   
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+  .heritage-layout { grid-template-columns: 1fr; }
   
   .heritage-categories {
     gap: 1.5rem;
