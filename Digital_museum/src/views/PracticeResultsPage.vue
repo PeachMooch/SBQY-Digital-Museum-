@@ -124,8 +124,7 @@ export default {
         { src: require('@/assets/images/花馍介绍.jpg'), alt: '花馍介绍', title: '花馍介绍', meta: '山东 · 烟台' },
         { src: require('@/assets/images/砖雕风采.jpg'), alt: '砖雕风采', title: '砖雕风采', meta: '山西 · 太原' },
         { src: require('@/assets/images/砖雕介绍.jpg'), alt: '砖雕介绍', title: '砖雕介绍', meta: '山西 · 太原' },
-        { src: require('@/assets/images/home-03-270x360.jpg'), alt: '访谈现场', title: '访谈现场', meta: '样本采集' },
-        { src: require('@/assets/images/home-02-270x360.jpg'), alt: '报告撰写', title: '报告撰写', meta: '方法沉淀' }
+        
       ],
       interviews: [
         { quote: '只有真正理解背后的生活逻辑，才能谈得上保护与传承', name: '刘老师', role: '文化研究者', desc: '田野记录不仅是“采样”，更是与在地共同面对现实问题的过程。' },

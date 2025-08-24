@@ -125,6 +125,106 @@
                 </div>
               </div>
             </div>
+            <!-- 第四张幻灯片 -->
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt4})` }">
+              <div class="swiper-slide-caption">
+                <div class="hero-center">
+                  <div class="hero-content">
+                    <div class="hero-logo fan">
+                      <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
+                    </div>
+                    <div class="hero-text">
+                      <h1 class="hero-title xl" data-caption-animate="fadeInUp" data-caption-delay="200">非遗与现代融合<br>激发文化新活力</h1>
+                      <p class="hero-subtitle lg" data-caption-animate="fadeInUp" data-caption-delay="350">以创新叙事与互动体验，链接传统与未来</p>
+                      <div class="hero-actions" data-caption-animate="fadeInUp" data-caption-delay="600">
+                        <router-link to="/homepage" class="btn btn-primary btn-ellipse btn-lg">
+                          <span class="icon mdi mdi-telegram"></span>开始旅程
+                        </router-link>
+                        <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
+                          <span class="icon mdi mdi-play"></span>播放影片
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第五张幻灯片 -->
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt5})` }">
+              <div class="swiper-slide-caption">
+                <div class="hero-center">
+                  <div class="hero-content">
+                    <div class="hero-logo fan">
+                      <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
+                    </div>
+                    <div class="hero-text">
+                      <h1 class="hero-title xl" data-caption-animate="fadeInUp" data-caption-delay="200">走进非遗匠心<br>看见手作之美</h1>
+                      <p class="hero-subtitle lg" data-caption-animate="fadeInUp" data-caption-delay="350">以青年视角，记录点滴，传递温度</p>
+                      <div class="hero-actions" data-caption-animate="fadeInUp" data-caption-delay="600">
+                        <router-link to="/homepage" class="btn btn-primary btn-ellipse btn-lg">
+                          <span class="icon mdi mdi-telegram"></span>开始旅程
+                        </router-link>
+                        <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
+                          <span class="icon mdi mdi-play"></span>播放影片
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第六张幻灯片 -->
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt6})` }">
+              <div class="swiper-slide-caption">
+                <div class="hero-center">
+                  <div class="hero-content">
+                    <div class="hero-logo fan">
+                      <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
+                    </div>
+                    <div class="hero-text">
+                      <h1 class="hero-title xl" data-caption-animate="fadeInUp" data-caption-delay="200">沉浸式体验<br>触摸历史脉搏</h1>
+                      <p class="hero-subtitle lg" data-caption-animate="fadeInUp" data-caption-delay="350">用科技之光重现古老文明的风采</p>
+                      <div class="hero-actions" data-caption-animate="fadeInUp" data-caption-delay="600">
+                        <router-link to="/homepage" class="btn btn-primary btn-ellipse btn-lg">
+                          <span class="icon mdi mdi-telegram"></span>开始旅程
+                        </router-link>
+                        <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
+                          <span class="icon mdi mdi-play"></span>播放影片
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第七张幻灯片 -->
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt7})` }">
+              <div class="swiper-slide-caption">
+                <div class="hero-center">
+                  <div class="hero-content">
+                    <div class="hero-logo fan">
+                      <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
+                    </div>
+                    <div class="hero-text">
+                      <h1 class="hero-title xl" data-caption-animate="fadeInUp" data-caption-delay="200">数字博物馆<br>连接你与文明</h1>
+                      <p class="hero-subtitle lg" data-caption-animate="fadeInUp" data-caption-delay="350">让文化触手可及，让传承生生不息</p>
+                      <div class="hero-actions" data-caption-animate="fadeInUp" data-caption-delay="600">
+                        <router-link to="/homepage" class="btn btn-primary btn-ellipse btn-lg">
+                          <span class="icon mdi mdi-telegram"></span>开始旅程
+                        </router-link>
+                        <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
+                          <span class="icon mdi mdi-play"></span>播放影片
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <!-- 分页器 -->
           <div class="swiper-pagination"></div>
@@ -179,9 +279,13 @@ export default {
       swiper: null,
       navbarOpen: false,
       slideImages: {
-        ppt1: require('@/assets/images/ppt1.jpg'),
-        ppt2: require('@/assets/images/ppt2.jpg'),
-        ppt3: require('@/assets/images/ppt3.jpg')
+        ppt1: process.env.BASE_URL + 'heropage/images/ppt1.jpg',
+        ppt2: process.env.BASE_URL + 'heropage/images/ppt2.jpg',
+        ppt3: process.env.BASE_URL + 'heropage/images/ppt3.jpg',
+        ppt4: process.env.BASE_URL + 'heropage/images/ppt4.jpg',
+        ppt5: process.env.BASE_URL + 'heropage/images/ppt5.jpg',
+        ppt6: process.env.BASE_URL + 'heropage/images/ppt6.jpg',
+        ppt7: process.env.BASE_URL + 'heropage/images/ppt7.jpg'
       }
     }
   },
@@ -239,16 +343,27 @@ export default {
         if (window.Swiper && this.$refs.swiperContainer) {
           this.swiper = new window.Swiper(this.$refs.swiperContainer, {
             autoplay: {
-              delay: 5000,
+              delay: 4000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: false
             },
             loop: true,
-            speed: 650,
-            effect: 'slide',
-            spaceBetween: 16,
+            speed: 700,
+            effect: 'fade',
+            fadeEffect: {
+              crossFade: true
+            },
             allowTouchMove: true,
             simulateTouch: true,
             roundLengths: true,
+            keyboard: {
+              enabled: true,
+              onlyInViewport: true
+            },
+            mousewheel: {
+              forceToAxis: true,
+              sensitivity: 0.7
+            },
             pagination: {
               el: '.swiper-pagination',
               clickable: true,
@@ -636,7 +751,7 @@ export default {
   100% { opacity: 1; }
 }
 
-/* 幻灯片样式 */
+/* 幻灯片样式（由 Swiper 接管显示/隐藏） */
 .swiper-slide {
   background-size: cover !important;
   background-position: center !important;
@@ -644,31 +759,6 @@ export default {
   height: 100vh !important;
   width: 100% !important;
   position: relative;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.swiper-slide:first-child {
-  display: block;
-  opacity: 1;
-}
-
-/* 应急背景色，防止完全黑屏 */
-.swiper-slide {
-  background-color: #2c3e50;
-}
-
-.swiper-slide:nth-child(1) {
-  background-color: #3498db;
-}
-
-.swiper-slide:nth-child(2) {
-  background-color: #e74c3c;
-}
-
-.swiper-slide:nth-child(3) {
-  background-color: #27ae60;
 }
 
 
