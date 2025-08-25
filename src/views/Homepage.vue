@@ -18,7 +18,7 @@
       <div class="w-full px-2 md:px-4">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <router-link to="/homepage" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+            <router-link to="/home" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
               <img 
                 :src="require('@/assets/images/practice-team-logo.png')" 
                 alt="实践队logo" 
@@ -29,19 +29,15 @@
           </div>
           
           <div class="flex items-center space-x-4 flex-wrap">
-            <!-- 数字博物馆导航 -->
+            <!-- 数字博物馆导航（合并入口） -->
             <nav class="hidden md:flex items-center space-x-4">
               <router-link to="/heropage" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors bg-red-50 rounded-md border border-red-200">
                 ✨ 实践队风采展示
               </router-link>
               <span class="text-gray-400">|</span>
               <router-link to="/home" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
-                山西数字博物馆
+                数字博物馆
               </router-link>
-              <span class="text-gray-400">|</span>
-              <button class="px-3 py-2 text-sm font-medium text-gray-400 cursor-not-allowed" disabled>
-                山东数字博物馆 (待开发)
-              </button>
               <span class="text-gray-400">|</span>
               <router-link to="/agriculture" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">
                 农业非遗特展
@@ -64,19 +60,19 @@
         <div class="swiper-container" ref="swiperContainer">
           <div class="swiper-wrapper">
             <!-- 第一张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt1})`, backgroundPosition: 'center 70%' }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt1})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }">
             </div>
             
             <!-- 第二张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt2})` }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt2})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }">
             </div>
             
             <!-- 第三张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt3})`, backgroundPosition: 'center 70%' }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt3})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }">
             </div>
 
             <!-- 第四张轮播图 -->
-            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt4})` }">
+            <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt4})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }">
             </div>
           </div>
           
@@ -107,7 +103,7 @@
         <img :src="introductionImage" alt="introduction" />
         <div class="mission-intro-text">
           <h3 class="mission-intro-title">愿景和使命</h3>
-          <div class="mission-intro-one">{{ mission.oneLiner }}</div>
+          <div class="mission-intro-one" v-html="formattedMissionText"></div>
         </div>
       </div>
 
@@ -116,17 +112,17 @@
 
       <!-- 社会实践成果展示区域 -->
       <section class="map-section">
-        <div class="container mx-auto px-4 py-8">
+        <div class="map-container">
           <!-- 实践队介绍 -->
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4 gradient-title">
+          <div class="text-center mb-4">
+            <h2 class="text-4xl font-bold mb-3 gradient-title">
               社会实践足迹
             </h2>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               我们的社会实践队深入山西、山东两省，开展实地调研活动。通过走访调研、实地观察、深度访谈等形式，
               深入了解当地经济社会发展状况，积累了宝贵的实践经验和研究成果。
             </p>
-            <div class="flex justify-center items-center gap-6 mt-6">
+            <div class="flex justify-center items-center gap-6 mt-3">
               <div class="flex items-center gap-2">
                 <div class="w-4 h-4 bg-red-600 rounded-full"></div>
                 <span class="text-sm font-medium text-gray-700">实践目的地</span>
@@ -139,7 +135,7 @@
           </div>
           
           <!-- 地图展示 -->
-          <div class="flex items-start justify-between gap-8 max-w-6xl mx-auto">
+          <div class="flex items-start justify-between gap-4 max-w-none mx-auto">
             <!-- 左侧：实践成果红色按钮 -->
             <aside class="results-aside results-left">
               <button @click="showPracticeResults" class="practice-success-btn">
@@ -151,7 +147,7 @@
             </aside>
 
             <!-- 中间：地图 -->
-            <div class="flex-1 max-w-4xl">
+            <div class="flex-1 max-w-none">
               <div ref="chinaChart" class="china-map">
                 <div v-if="mapLoading" class="loading-indicator">
                   <div class="loading-spinner"></div>
@@ -469,16 +465,27 @@
         </div>
       </div>
     </footer>
+    <AIFloatingAssistant />
   </div>
 </template>
 
 <script>
 import MissionVision from '@/components/MissionVision.vue'
 import TeamOverview from '@/components/TeamOverview.vue'
+import AIFloatingAssistant from '@/components/AIFloatingAssistant.vue'
 
 export default {
   name: 'HomePageView',
-  components: { MissionVision, TeamOverview },
+  components: { MissionVision, TeamOverview, AIFloatingAssistant },
+  computed: {
+    formattedMissionText() {
+      return this.mission.oneLiner
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // 转换markdown加粗为HTML
+        .split('\n\n')  // 按双换行分段
+        .map(paragraph => `<p class="mission-paragraph">${paragraph}</p>`)  // 每段包装为p标签
+        .join('')
+    }
+  },
   data() {
     return {
       isLoading: true,
@@ -510,7 +517,7 @@ export default {
       mission: {
         vision: '守护并活化在地文化记忆，推动社会参与',
         mission: '以发现—记录—传播为路径，促公共文化服务优化',
-        oneLiner: '守护与活化在地文化记忆，以发现—记录—传播赋能公共文化。',
+        oneLiner: '我们的**愿景**是让沉淀千年的非遗文化在数字时代焕发新生，从历史的珍藏转变为涌动于日常生活的鲜活力量，成为凝聚民族认同、坚定文化自信的源泉。\n\n我们的**使命**是深入文化腹地，通过系统的数字化记录与存续，守护非遗根脉；以创新的文创开发与新媒体传播，打破文化壁垒，使其更广泛地融入现代生活；并搭建产学研融合的桥梁，探索可持续的传承模式。我们旨在以青年之眼发现文化之美，以科技之力延续非遗之火，最终推动传统文化在创造性转化与创新性发展中薪火相传，生生不息。',
         methods: [
           { title: '发现', points: ['田野走访', '问题定位'], icon: '🔍' },
           { title: '记录', points: ['标准化方法沉淀', '图像/文本/数据'], icon: '📝' },
@@ -522,12 +529,83 @@ export default {
       team: {
         leader: { name: '指导老师', title: '总负责人', avatar: require('@/assets/images/practice-team-logo.png') },
         groups: [
-          { key: 'digital', name: '数字组', desc: '数据治理与可视化', tags: ['数据','可视化'], members: [{ name: '成员A', role: '数据工程' }] },
-          { key: 'photo', name: '摄影组', desc: '影像采集与编辑', tags: ['影像','拍摄'], members: [{ name: '成员B', role: '摄影' }] },
-          { key: 'promo', name: '宣传组', desc: '品牌与传播', tags: ['新媒体','海报'], members: [{ name: '成员C', role: '运营' }] },
-          { key: 'research', name: '调研组', desc: '田野与文献研究', tags: ['方法','访谈'], members: [{ name: '成员D', role: '调研' }] },
-          { key: 'ops', name: '事务组', desc: '后勤与协调', tags: ['行政','对接'], members: [{ name: '成员E', role: '事务' }] },
-          { key: 'thinktank', name: '智囊团', desc: '策略与顾问', tags: ['策略','评审'], members: [{ name: '成员F', role: '顾问' }] }
+          { 
+            key: 'digital', 
+            name: '数字组', 
+            desc: '数据治理与可视化', 
+            tags: ['数据','可视化'], 
+            members: [
+              { name: '唐宇阔', role: '组长', photo: process.env.BASE_URL + 'homepage/images/digital/数字组-组长-唐宇阔.jpg' },
+              { name: '李泓伯', role: '成员', photo: process.env.BASE_URL + 'homepage/images/digital/数字组-李泓伯.jpg' },
+              { name: '王一涵', role: '成员', photo: process.env.BASE_URL + 'homepage/images/digital/数字组-王一涵.jpg' }
+            ]
+          },
+          { 
+            key: 'photo', 
+            name: '摄影组', 
+            desc: '影像采集与编辑', 
+            tags: ['影像','拍摄'], 
+            members: [
+              { name: '邓语馨', role: '组长', photo: process.env.BASE_URL + 'homepage/images/camera/摄影组-组长-邓语馨.jpg' },
+              { name: '高琳纳', role: '成员', photo: process.env.BASE_URL + 'homepage/images/camera/摄影组-高琳纳.png' }
+            ]
+          },
+          { 
+            key: 'promo', 
+            name: '宣传组', 
+            desc: '品牌与传播', 
+            tags: ['新媒体','海报'], 
+            members: [
+              { name: '唐震', role: '组长', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-组长-唐震.jpg' },
+              { name: '卢蓉', role: '组长', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-组长-卢蓉.jpg' },
+              { name: '宋佳轩', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-宋佳轩.jpg' },
+              { name: '张诗淇', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-张诗淇.png' },
+              { name: '沈沫含', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-沈沫含.png' },
+              { name: '赵敏彤', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-赵敏彤.png' },
+              { name: '赵梦冉', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-赵梦冉.jpg' },
+              { name: '杨承金', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-杨承金.jpg' },
+              { name: '王佳瑶', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-王佳瑶.png' },
+              { name: '陈宇', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-陈宇.png' },
+              { name: '贾文格格', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Promotion/宣传组-贾文格格.png' }
+            ]
+          },
+          { 
+            key: 'research', 
+            name: '调研组', 
+            desc: '田野与文献研究', 
+            tags: ['方法','访谈'], 
+            members: [
+              { name: '王雪婷', role: '组长', photo: process.env.BASE_URL + 'homepage/images/Research/调研组-组长-王雪婷.jpg' },
+              { name: '韦亚萍', role: '组长', photo: process.env.BASE_URL + 'homepage/images/Research/调研组-组长-韦亚萍.png' },
+              { name: '葛照然', role: '队长', photo: process.env.BASE_URL + 'homepage/images/Research/队长-调研组-葛照然.png' },
+              { name: '田欣', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Research/调研组-田欣.jpg' },
+              { name: '周艺埼', role: '成员', photo: process.env.BASE_URL + 'homepage/images/Research/调研组-周艺埼.jpg' }
+            ]
+          },
+          { 
+            key: 'ops', 
+            name: '外联组', 
+            desc: '后勤与协调', 
+            tags: ['行政','对接'], 
+            members: [
+              { name: '野菲雪', role: '组长', photo: process.env.BASE_URL + 'homepage/images/External_relation/外联组-组长-野菲雪.jpg' },
+              { name: '李一帆', role: '成员', photo: process.env.BASE_URL + 'homepage/images/External_relation/外联组-李一帆.png' },
+              { name: '丁培婧', role: '成员', photo: process.env.BASE_URL + 'homepage/images/External_relation/外联组-丁培婧.png' },
+              { name: '施云峰', role: '成员', photo: process.env.BASE_URL + 'homepage/images/External_relation/外联组-施云峰.png' },
+              { name: '王灿', role: '成员', photo: process.env.BASE_URL + 'homepage/images/External_relation/外联组-王灿.png' }
+            ]
+          },
+          { 
+            key: 'thinktank', 
+            name: '智囊团', 
+            desc: '策略与顾问', 
+            tags: ['策略','评审'], 
+            members: [
+              { name: '曹子平', role: '成员', photo: process.env.BASE_URL + 'homepage/images/smart/智囊团-曹子平.jpeg' },
+              { name: '田雨萱', role: '成员', photo: process.env.BASE_URL + 'homepage/images/smart/智囊团-田雨萱.png' },
+              { name: '迟学君', role: '成员', photo: process.env.BASE_URL + 'homepage/images/smart/智囊团-迟学君.jpg' }
+            ]
+          }
         ]
       },
 
@@ -545,7 +623,6 @@ export default {
     this.startLoading();
     this.missionBlocks = this.mission.methods.map(m => ({ title: m.title, points: m.points, icon: m.icon }))
   },
-  computed: {},
   beforeDestroy() {
     if (this.swiper) {
       this.swiper.destroy();
@@ -775,6 +852,12 @@ export default {
           this.mapLoading = false;
           this.mapChart = this.echarts.init(this.$refs.chinaChart);
           this.renderChinaMap();
+          // 确保地图充分利用容器空间
+          setTimeout(() => {
+            if (this.mapChart) {
+              this.mapChart.resize();
+            }
+          }, 100);
         }
       });
     },
@@ -803,7 +886,7 @@ export default {
 
       const option = {
         title: {
-          text: '实践足迹地图（点击山东或山西查看市级行政区）',
+          text: '实践足迹地图',
           left: 'center',
           textStyle: { color: '#333', fontWeight: 700 }
         },
@@ -831,19 +914,25 @@ export default {
           }))
         },
         series: [
-          // 天津logo标记
+          // 天津城市标记
           {
             name: '出发地',
             type: 'scatter',
             coordinateSystem: 'geo',
-            symbol: `image://${require('@/assets/images/纯图logo.png')}`,
-            symbolSize: 48, // 进一步增大logo尺寸
+            symbol: 'diamond', // 使用菱形标记
+            symbolSize: 20,
+            itemStyle: {
+              color: '#3b82f6', // 蓝色标记
+              borderColor: '#1e40af',
+              borderWidth: 2
+            },
             label: { 
               show: true, 
               formatter: '天津', 
               color: '#1f2937', 
-              fontWeight: 600, 
-              offset: [0, -16] 
+              fontWeight: 600,
+              fontSize: 12,
+              offset: [0, -15] 
             },
             data: [{ name: '天津', value: tianjinCoord }]
           },
@@ -1009,12 +1098,8 @@ export default {
       const shanxiCities = ['太原', '晋城', '晋中', '运城'];
       const shandongCities = ['淄博', '潍坊', '烟台'];
       
-      if (shanxiCities.includes(normalizedCityName)) {
-        // 跳转到山西数字博物馆
+      if (shanxiCities.includes(normalizedCityName) || shandongCities.includes(normalizedCityName)) {
         this.$router.push('/home');
-      } else if (shandongCities.includes(normalizedCityName)) {
-        // 山东博物馆暂未开发，显示提示
-        alert(`${normalizedCityName}对应的山东数字博物馆正在开发中，敬请期待！`);
       }
     },
 
@@ -1198,47 +1283,84 @@ export default {
 /* 愿景与使命下方介绍图片样式 */
 .mission-intro-image-wrap {
   /* 两列布局：左图右文 */
-  max-width: 1100px;
-  margin: 0 auto 1.5rem;
-  padding: 0 1rem;
+  max-width: 1400px;
+  margin: 0 auto 1rem;
+  padding: 0 2rem;
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 24px;
-  align-items: center; /* 垂直方向居中 */
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: stretch; /* 左右两列等高 */
 }
 .mission-intro-image-wrap img {
   display: block;
-  width: 360px;
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 防止变形，整体缩放以适配文字高度 */
   border-radius: 12px;
 }
 
 .mission-intro-text {
-  font-size: 1.125rem;
-  line-height: 1.9;
+  font-size: 1.25rem;
+  line-height: 1.8;
   color: #374151;
   justify-self: center; /* 水平方向居中到右侧空白区域中间 */
   text-align: center;
+  padding: 0 1rem;
 }
 
 .mission-intro-title {
   font-size: 2rem;
   font-weight: 800;
   color: #0f172a;
-  margin-bottom: 0.5rem;
+  margin-bottom: 4rem;
+  margin-top: -1rem;
 }
 .mission-intro-one {
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   color: #374151;
+}
+
+.mission-paragraph {
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.mission-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.mission-paragraph strong {
+  color: #dc2626;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
   .mission-intro-image-wrap {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 0 1rem;
+    margin: 0 auto 0.5rem;
   }
   .mission-intro-image-wrap img {
     width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+  .mission-intro-text {
+    font-size: 1rem;
+    padding: 0;
+  }
+  .mission-intro-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: -0.5rem;
+  }
+  .mission-paragraph {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
   }
 }
 
@@ -1356,11 +1478,10 @@ export default {
 
 /* 轮播图样式 */
 .hero-carousel-section {
-  height: 60vh;
+  height: calc(100vh - 64px);
   width: 100%;
   position: relative;
-  max-height: 500px;
-  min-height: 300px;
+  min-height: 320px;
 }
 
 .swiper-container {
@@ -1426,9 +1547,29 @@ export default {
 /* 地图区域样式 */
 .map-section {
   background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fef2f2 100%);
-  min-height: 100vh;
-  padding-top: 2rem;
+  min-height: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   position: relative;
+}
+
+.map-container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 1rem 0.25rem 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    max-width: 100%;
+    padding: 0.75rem 0.25rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    padding: 0.5rem 0.1rem 0;
+  }
 }
 
 .map-section::before {
@@ -1444,7 +1585,7 @@ export default {
 /* 中国地图样式 */
 .china-map {
   width: 100%;
-  height: 700px; /* 进一步增加地图高度 */
+  height: 1300px; /* 超大容器高度，确保地图充分显示 */
   position: relative;
   background: #fff;
   border-radius: 12px;
@@ -1631,9 +1772,8 @@ export default {
 
 @media (max-width: 768px) {
   .hero-carousel-section {
-    height: 50vh;
-    max-height: 400px;
-    min-height: 250px;
+    height: calc(100vh - 64px);
+    min-height: 260px;
   }
   
   .swiper-button-next,
@@ -1672,19 +1812,18 @@ export default {
   }
   
   .china-map {
-    height: 550px; /* 移动端也相应增加高度 */
+    height: 1000px; /* 移动端超大容器高度 */
   }
 }
 
 @media (max-width: 480px) {
   .hero-carousel-section {
-    height: 45vh;
-    max-height: 350px;
+    height: calc(100vh - 64px);
     min-height: 220px;
   }
   
   .china-map {
-    height: 480px; /* 小屏设备也相应增加高度 */
+    height: 900px; /* 小屏设备超大容器高度 */
   }
 }
 
@@ -1696,7 +1835,7 @@ export default {
 
 
 .hero-carousel-section {
-  height: 50vh;
+  height: calc(100vh - 64px);
 }
 
 .swiper-container {
@@ -1718,7 +1857,7 @@ export default {
 }
 
 .china-map {
-  height: 500px;
+  height: 1300px;
   width: 100%;
   position: relative;
 }
@@ -2023,7 +2162,7 @@ export default {
   }
   
   .china-map {
-    height: 300px;
+    height: 800px;
   }
   
   .text-4xl {

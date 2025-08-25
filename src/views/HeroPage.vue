@@ -54,9 +54,9 @@
             <!-- 第一张幻灯片 -->
             <div class="swiper-slide swiper-slide-overlay-disable" :style="{ backgroundImage: `url(${slideImages.ppt1})` }">
               <div class="swiper-slide-caption">
-                <div class="hero-center">
-                  <div class="hero-content">
-                    <div class="hero-logo fan">
+                 <div class="hero-content-right">
+                   <!-- Logo在文字左侧 -->
+                   <div class="slide-logo">
                       <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
                     </div>
                     <div class="hero-text">
@@ -69,7 +69,6 @@
                         <router-link to="/index" class="btn btn-default btn-ellipse btn-lg ghost" style="margin-left: 15px;">
                           <span class="icon mdi mdi-museum"></span>山西博物馆
                         </router-link>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -79,9 +78,9 @@
             <!-- 第二张幻灯片 -->
             <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt2})` }">
               <div class="swiper-slide-caption">
-                <div class="hero-center">
-                  <div class="hero-content">
-                    <div class="hero-logo fan">
+                <div class="hero-content-right">
+                  <!-- Logo在文字左侧 -->
+                  <div class="slide-logo">
                       <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
                     </div>
                     <div class="hero-text">
@@ -94,7 +93,6 @@
                         <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
                           <span class="icon mdi mdi-play"></span>播放影片
                         </a>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -104,9 +102,9 @@
             <!-- 第三张幻灯片 -->
             <div class="swiper-slide" :style="{ backgroundImage: `url(${slideImages.ppt3})` }">
               <div class="swiper-slide-caption">
-                <div class="hero-center">
-                  <div class="hero-content">
-                    <div class="hero-logo">
+                <div class="hero-content-right">
+                  <!-- Logo在文字左侧 -->
+                  <div class="slide-logo">
                       <img :src="require('@/assets/images/logo(before).png')" alt="Logo">
                     </div>
                     <div class="hero-text">
@@ -119,7 +117,6 @@
                         <a class="btn btn-default btn-ellipse btn-lg ghost" href="#" style="margin-left: 15px;">
                           <span class="icon mdi mdi-play"></span>播放影片
                         </a>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -194,11 +191,16 @@ export default {
         this.initSwiper();
       });
     }, 500);
+
+    // 监听页面可见性变化，确保自动播放正常工作
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
   },
   beforeDestroy() {
     if (this.swiper) {
       this.swiper.destroy();
     }
+    // 清理事件监听器
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
   },
   methods: {
     loadAssets() {
@@ -237,26 +239,65 @@ export default {
       // 使用动态导入加载Swiper
       this.loadSwiperScript().then(() => {
         if (window.Swiper && this.$refs.swiperContainer) {
+          console.log('Initializing Swiper...');
+          console.log('Container:', this.$refs.swiperContainer);
+          console.log('Slides count:', this.$refs.swiperContainer.querySelectorAll('.swiper-slide').length);
+          
           this.swiper = new window.Swiper(this.$refs.swiperContainer, {
-            autoplay: {
-              delay: 5000,
-              disableOnInteraction: false,
-            },
-            loop: true,
-            speed: 650,
+            // 基本配置
+            direction: 'horizontal',
+            loop: true, // 循环播放
+            speed: 650, // 切换速度
             effect: 'slide',
-            spaceBetween: 16,
+            spaceBetween: 0, // 减少间距以确保平滑切换
+            slidesPerView: 1, // 每次显示一张
+            centeredSlides: true, // 居中显示
+            
+            // 自动播放配置
+            autoplay: {
+              delay: 3000, // 每3秒自动切换
+              disableOnInteraction: false, // 用户交互后继续自动播放
+              pauseOnMouseEnter: false, // 鼠标悬停时不暂停
+              stopOnLastSlide: false, // 不在最后一张停止
+            },
+            
+            // 触摸配置
             allowTouchMove: true,
             simulateTouch: true,
-            roundLengths: true,
+            touchRatio: 1,
+            touchAngle: 45,
+            
+            // 分页器配置
             pagination: {
               el: '.swiper-pagination',
               clickable: true,
+              dynamicBullets: true,
             },
             on: {
-              init: () => { this.initSlideBackgrounds(); this.playCaptionAnimation(); },
-              slideChangeTransitionStart: () => { this.hideCaptionAnimation(); },
-              slideChangeTransitionEnd: () => { this.playCaptionAnimation(); }
+              init: () => { 
+                console.log('Swiper initialized with 3s autoplay');
+                this.initSlideBackgrounds(); 
+                this.playCaptionAnimation();
+                // 强制启动自动播放
+                setTimeout(() => {
+                  if (this.swiper && this.swiper.autoplay) {
+                    this.swiper.autoplay.start();
+                    console.log('Autoplay force started');
+                  }
+                }, 100);
+              },
+              slideChangeTransitionStart: () => { 
+                console.log('Slide change started');
+                this.hideCaptionAnimation(); 
+              },
+              slideChangeTransitionEnd: () => { 
+                console.log('Slide change completed');
+                this.playCaptionAnimation(); 
+              },
+              autoplayTimeLeft: () => {
+                // 可选：显示自动播放倒计时（用于调试）
+                // console.log('Autoplay timer tick');
+              }
             }
           });
         }
@@ -297,7 +338,7 @@ export default {
     hideCaptionAnimation() {
       const slide = document.querySelector('.swiper-slide-active');
       if (!slide) return;
-      const items = slide.querySelectorAll('[data-caption-animate], .hero-logo');
+      const items = slide.querySelectorAll('[data-caption-animate], .slide-logo');
       items.forEach(el => {
         el.classList.remove('animated');
         el.style.animationDelay = '0ms';
@@ -309,7 +350,7 @@ export default {
     playCaptionAnimation() {
       const slide = document.querySelector('.swiper-slide-active');
       if (!slide) return;
-      const items = slide.querySelectorAll('[data-caption-animate], .hero-logo');
+      const items = slide.querySelectorAll('[data-caption-animate], .slide-logo');
       items.forEach(el => {
         const anim = el.getAttribute('data-caption-animate') || 'fadeInUp';
         const delay = Number(el.getAttribute('data-caption-delay') || 0);
@@ -324,6 +365,19 @@ export default {
 
     toggleNavbar() {
       this.navbarOpen = !this.navbarOpen;
+    },
+
+    handleVisibilityChange() {
+      if (this.swiper) {
+        if (document.hidden) {
+          // 页面隐藏时暂停自动播放
+          this.swiper.autoplay.stop();
+        } else {
+          // 页面显示时恢复自动播放
+          this.swiper.autoplay.start();
+          console.log('Autoplay resumed');
+        }
+      }
     }
   }
 }
@@ -370,6 +424,9 @@ export default {
   background-position: center !important;
   background-repeat: no-repeat !important;
   position: relative;
+  /* 确保slides能正常显示和切换 */
+  display: block !important;
+  opacity: 1 !important;
 }
 
 .swiper-slide::before {
@@ -391,6 +448,7 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 10; /* 确保内容在蒙版之上 */
+  padding-top: 150px; /* 减少padding-top值，文字内容上移 */
 }
 
 /* 预加载器样式 */
@@ -491,19 +549,70 @@ export default {
 .btn-lg { padding: 14px 36px; font-size: 16px; }
 .btn-default.ghost { backdrop-filter: blur(6px); }
 
-/* 居中布局：左侧Logo + 右侧文本 */
-.hero-center { width: 100%; display: flex; justify-content: center; }
-.hero-content { display: grid; grid-template-columns: minmax(180px, 220px) minmax(360px, 820px); align-items: center; gap: 40px; padding: 0 24px; }
-.hero-logo { width: 180px; height: 180px; border-radius: 50%; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,.3); justify-self: end; }
-.hero-logo.fan { width: 180px; height: 280px; border-radius: 20px; overflow: visible; }
-.hero-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.hero-text { text-align: left; }
+/* 左Logo右文字布局 */
+.hero-content-right { 
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: flex-start; /* 顶部对齐 */
+  padding: 0 40px; /* 左右边距 */
+  gap: 40px; /* logo和文字之间的间距 */
+}
+.hero-text { 
+  text-align: left; 
+  max-width: 600px; /* 限制文本最大宽度 */
+  flex: 1; /* 占据剩余空间 */
+}
 .hero-actions { margin-top: 24px; }
 
-@media (max-width: 992px) {
-  .hero-content { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-  .hero-text { text-align: center; }
+/* Logo在文字左侧的样式 */
+.slide-logo {
+  flex-shrink: 0; /* 防止被压缩 */
+  width: 180px;
+  height: 280px;
+  opacity: 0;
+  animation: slideInFromLeft 1.2s ease-out 0.5s forwards;
 }
+
+.slide-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Logo从左侧滑入动画效果 */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-content-right { 
+    flex-direction: column; /* 垂直布局 */
+    align-items: center;
+    justify-content: center; 
+    padding: 0 20px;
+    gap: 20px; /* 减少间距 */
+  }
+  .hero-text { 
+    text-align: center; 
+    max-width: 100%;
+  }
+  .slide-logo {
+    width: 120px;
+    height: 180px;
+    animation: slideInFromLeft 1.2s ease-out 0.5s forwards;
+  }
+}
+
+
 
 .swiper-container {
   width: 100% !important;
@@ -636,23 +745,7 @@ export default {
   100% { opacity: 1; }
 }
 
-/* 幻灯片样式 */
-.swiper-slide {
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  height: 100vh !important;
-  width: 100% !important;
-  position: relative;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.swiper-slide:first-child {
-  display: block;
-  opacity: 1;
-}
+/* 移除冲突的幻灯片样式，让Swiper自己管理显示状态 */
 
 /* 应急背景色，防止完全黑屏 */
 .swiper-slide {
