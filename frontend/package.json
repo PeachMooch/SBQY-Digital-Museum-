@@ -10,7 +10,6 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "china-geojson": "^1.0.0",
-    "concurrently": "^9.2.1",
     "core-js": "^3.8.3",
     "echarts": "^6.0.0",
     "lucide": "^0.541.0",
